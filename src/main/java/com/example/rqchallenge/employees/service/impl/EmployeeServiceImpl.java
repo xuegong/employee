@@ -131,7 +131,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
             restTemplate.delete(baseUrl + "/delete/" + id);
             return employeeName;
         } catch (HttpClientErrorException e) {
-            throw new RemoteApiException("Failed to delete employee with ID " + id + " from the remote API.");
+            throw new RemoteApiException("Failed to delete employee with ID " + id + " from the remote API: "+e.getMessage());
         }
     }
 }
