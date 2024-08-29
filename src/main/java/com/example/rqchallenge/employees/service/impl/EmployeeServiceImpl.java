@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                     baseUrl + "/employees",
                     HttpMethod.GET,
                     null,
-                    new ParameterizedTypeReference<ApiResponse<List<Employee>>>() {
+                    new ParameterizedTypeReference<>() {
                     }
             );
             return response.getBody().getData();
@@ -66,7 +66,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                     baseUrl + "/employee/" + id,
                     HttpMethod.GET,
                     null,
-                    new ParameterizedTypeReference<ApiResponse<Employee>>() {
+                    new ParameterizedTypeReference<>() {
                     }
             );
             return Optional.ofNullable(response.getBody().getData());
@@ -109,7 +109,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                     baseUrl + "/create",
                     HttpMethod.POST,
                     new HttpEntity<>(employeeInput),
-                    new ParameterizedTypeReference<ApiResponse<Employee>>() {
+                    new ParameterizedTypeReference<>() {
                     }
             );
             return response.getBody().getData();
