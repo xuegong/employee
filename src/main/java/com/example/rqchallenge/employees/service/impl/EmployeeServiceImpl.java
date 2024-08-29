@@ -119,11 +119,19 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public void deleteEmployeeById(String id) {
+    public String deleteEmployeeById(String id) {
         try {
+            // Retrieve the employee to get the name before deletion
+            Optional<Employee> employeeOpt = getEmployeeById(id);
+            if (!employeeOpt.isPresent()) {
+                throw new RemoteApiException("Employee not found for ID: " + id);
+            }
+            String employeeName = employeeOpt.get().getName();
+            // Perform the delete operation
             restTemplate.delete(baseUrl + "/delete/" + id);
+            return employeeName;
         } catch (HttpClientErrorException e) {
-            throw new RemoteApiException("Failed to delete employee on the remote API: " + e.getMessage());
+            throw new RemoteApiException("Failed to delete employee with ID " + id + " from the remote API.");
         }
     }
 }

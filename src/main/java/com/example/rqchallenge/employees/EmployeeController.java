@@ -69,7 +69,6 @@ public class EmployeeController implements IEmployeeController {
     @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEmployeeById(@PathVariable String id) {
-        employeeService.deleteEmployeeById(id);
-        return new ResponseEntity<>("Employee deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>( employeeService.deleteEmployeeById(id), HttpStatus.OK);
     }
 }

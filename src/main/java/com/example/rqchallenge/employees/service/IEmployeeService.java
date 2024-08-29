@@ -20,5 +20,5 @@ public interface IEmployeeService {
 
     Employee createEmployee(Map<String, Object> employeeInput);
 
-    void deleteEmployeeById(String id);
+    String deleteEmployeeById(String id);
 }

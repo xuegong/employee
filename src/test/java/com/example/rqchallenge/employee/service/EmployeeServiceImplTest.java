@@ -168,10 +168,26 @@ class EmployeeServiceImplTest {
 
     @Test
     void testDeleteEmployeeById() {
+        // Mock the getEmployeeById call to return an employee
+        ApiResponse<Employee> apiResponse = new ApiResponse<>();
+        apiResponse.setStatus("success");
+        apiResponse.setData(employee1);
+        apiResponse.setMessage("Successfully! Record has been fetched.");
+
+        when(restTemplate.exchange(anyString(), eq(HttpMethod.GET), eq(null), any(ParameterizedTypeReference.class)))
+                .thenReturn(new ResponseEntity<>(apiResponse, HttpStatus.OK));
+
+        // Mock the delete operation
         doNothing().when(restTemplate).delete(anyString());
 
-        employeeService.deleteEmployeeById("1");
+        // Call the method under test
+        String deletedEmployeeName = employeeService.deleteEmployeeById("1");
 
+        // Verify the name of the deleted employee is returned
+        assertEquals("Tiger Nixon", deletedEmployeeName);
+
+        // Verify that the delete method was called once
         verify(restTemplate, times(1)).delete(anyString());
     }
+
 }

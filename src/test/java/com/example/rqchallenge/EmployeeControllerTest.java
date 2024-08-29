@@ -108,14 +108,11 @@ public class EmployeeControllerTest {
         verify(employeeService, times(1)).createEmployee(any());
     }
 
-    @Test
     void testDeleteEmployeeById() throws Exception {
-        doNothing().when(employeeService).deleteEmployeeById("1");
-
+        when(employeeService.deleteEmployeeById(anyString())).thenReturn("Tiger Nixon");
         mockMvc.perform(delete("/employees/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Employee deleted successfully"));
-
+                .andExpect(content().string("Tiger Nixon"));
         verify(employeeService, times(1)).deleteEmployeeById("1");
     }
 
