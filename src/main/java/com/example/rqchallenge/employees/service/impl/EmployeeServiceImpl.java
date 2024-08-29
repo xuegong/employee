@@ -118,6 +118,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         }
     }
 
+    //this is difficult because to return the name requires two steps. and the remote api won't allow two calls in a row.
     @Override
     public String deleteEmployeeById(String id) {
         try {
